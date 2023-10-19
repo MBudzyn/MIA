@@ -1,63 +1,79 @@
-def permutation_3(table1,table2,table3,number_of_perm):
-    res = []
-    if number_of_perm == 3:
-        for i in table1:
-            for j in table2:
-                for k in table3:
-                    res.append(int(i+j+k))
-                    res.append(int(j+i+k))
-                    res.append(int(i+k+j))
-                    res.append(int(j+k+i))
-                    res.append(int(k+i+j))
-                    res.append(int(k+j+i))
 
-    for i in range(6):
-        for j in range(6):
-            res.append(int(table1[i] + table2[j]))
-            res.append(int(table1[i] + table3[j]))
-            res.append(int(table2[i] + table3[j]))
-            res.append(int(table2[i] + table1[j]))
-            res.append(int(table3[i] + table2[j]))
-            res.append(int(table3[i] + table1[j]))
+class Zad1:
+    def __init__(self):
+        self.cube1 = []
+        self.cube2 = []
+        self.cube3 = []
+        self.number_of_dice = 0
+        self.res = []
 
-    for i in range(6):
-        if table1[i] != "":
-            res.append(int(table1[i]))
-        if table2[i] != "":
-            res.append(int(table2[i]))
-        if table3[i] != "":
-            res.append(int(table3[i]))
+    def load_data(self):
+        self.number_of_dice = int(input())
 
-    return list(set(res))
+        for i in range(self.number_of_dice):
+            if i == 0:
+                self.cube1 = input().split(" ")
+            if i == 1:
+                self.cube2 = input().split(" ")
+            if i == 2:
+                self.cube3 = input().split(" ")
 
+    def permutation_3(self):
+
+        for i in range(6):
+            for j in range(6):
+                self.res.append(int(self.cube1[i] + self.cube2[j]))
+                self.res.append(int(self.cube1[i] + self.cube3[j]))
+                self.res.append(int(self.cube2[i] + self.cube3[j]))
+                self.res.append(int(self.cube2[i] + self.cube1[j]))
+                self.res.append(int(self.cube3[i] + self.cube2[j]))
+                self.res.append(int(self.cube3[i] + self.cube1[j]))
+
+        for i in range(6):
+            self.res.append(int(self.cube1[i]))
+            self.res.append(int(self.cube2[i]))
+            self.res.append(int(self.cube3[i]))
+
+        self.res = list(set(self.res))
+
+    def permutation_2(self):
+        for i in range(6):
+            for j in range(6):
+                self.res.append(int(self.cube1[i] + self.cube2[j]))
+                self.res.append(int(self.cube2[i] + self.cube1[j]))
+
+        for i in range(6):
+            self.res.append(int(self.cube1[i]))
+            self.res.append(int(self.cube2[i]))
+
+        self.res = list(set(self.res))
+    def permutation_1(self):
+        for i in range(6):
+            self.res.append(int(self.cube1[i]))
+        self.res = list(set(self.res))
+
+    def function(self):
+        if self.number_of_dice == 3:
+            self.permutation_3()
+        if self.number_of_dice == 2:
+            self.permutation_2()
+        if self.number_of_dice == 1:
+            self.permutation_1()
+
+        self.res.sort()
+        if self.res[0] == 0:
+            self.res = self.res[1:]
+        for i in range(1,len(self.res) + 1):
+            if self.res[i-1] != i:
+                return i-1
+        return len(self.res)
 
 def cubes_for_masha():
-    cube1 = []
-    cube2 = []
-    cube3 = []
-    number_of_dice = int(input())
-    if number_of_dice == 2:
-        cube3 = ["","","","","",""]
+    zad1 = Zad1()
+    zad1.load_data()
+    return zad1.function()
 
-    for i in range(number_of_dice):
-        if i==0:
-            cube1 = input().split(" ")
-        if i==1:
-            cube2 = input().split(" ")
-        if i==2:
-            cube3 = input().split(" ")
-    if number_of_dice ==1:
-        for i in range(1,8):
-            if str(i) not in cube1:
-                return i-1
 
-    res = (permutation_3(cube1,cube2,cube3,number_of_dice))
-    res.sort()
-    print(res)
-    if res[0] == 0:
-        res = res[1:]
-    for i in range(1,1000):
-        if i != res[i-1]:
-            return i-1
 
-cubes_for_masha()
+print(cubes_for_masha())
+
