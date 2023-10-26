@@ -26,7 +26,6 @@ class Zad2:
         if self.number_of_ones == -1:
             return 0
         if self.change_cost > self.reverse_cost:
-
             return self.number_of_ones * self.reverse_cost + self.change_cost
         else:
             return (self.number_of_ones + 1) * self.change_cost
