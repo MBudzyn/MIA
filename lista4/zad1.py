@@ -30,5 +30,5 @@ def fun_exe():
         one_example.run()
         if i!= number_of_rows-1:
             print()
-            
+
 fun_exe()
