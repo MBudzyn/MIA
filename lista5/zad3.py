@@ -34,6 +34,26 @@ class Zad3():
         else:
             return result
 
+    def None_possible_to_create_case(self):
+        for start_index in range(len(self.table_with_marks) - 1):
+            current_index = start_index + 1
+            current_length = self.table_with_marks[current_index] - self.table_with_marks[start_index]
+            while current_length < self.women_distance:
+                current_index = current_index + 1
+                current_length = self.table_with_marks[current_index] - self.table_with_marks[start_index]
+            current_length = 0
+            new_mark = self.table_with_marks[start_index] + self.women_distance
+            while current_length < self.men_distance:
+                current_index = current_index + 1
+                current_length = self.table_with_marks[current_index] - new_mark
+            if current_length == self.men_distance:
+                return [new_mark]
+        return [self.women_distance,self.men_distance]
+
+
+
+
+
 
 
 
