@@ -13,8 +13,6 @@ def number_of_elements_less_than_number(table,number):
         return begin_index + 1
     else:
         return 0
-
-
 class Zad2():
     def __init__(self):
         self.length_of_table_a = 0
@@ -22,21 +20,17 @@ class Zad2():
         self.table_a = []
         self.table_b = []
         self.result = []
-
     def load_data(self):
         self.length_of_table_a,self.length_of_table_b = map(int,input().split())
         self.table_a = sorted(list(map(int,input().split())))
         self.table_b = list(map(int,input().split()))
-
     def fun(self):
         for el_b in self.table_b:
             self.result.append(number_of_elements_less_than_number(self.table_a,el_b))
-
     def print_result(self):
         for i in range(len(self.result) - 1):
             print(self.result[i],end=" ")
         print(self.result[len(self.result) - 1],end="")
-
     def run(self):
         self.load_data()
         self.fun()

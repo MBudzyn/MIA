@@ -3,6 +3,8 @@ class Zad2:
         self.rows = 0
         self.letters = 0
         self.worlds_table = []
+
+
     def load_data(self):
         tmp_table = input().split()
         self.rows = int(tmp_table[0])
