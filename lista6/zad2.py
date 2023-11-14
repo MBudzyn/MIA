@@ -1,8 +1,8 @@
 
-def has_divisor(number):
-    for i in range(2,int(number**(1/2)) + 1):
-        if number % i == 0:
-            return number//i
+def has_intiger_square(number):
+    t = number**(1/2)
+    if int(t) == t:
+        return t
     return False
 def is_prime(number):
     if number == 1:
@@ -12,36 +12,28 @@ def is_prime(number):
             return False
     return True
 def is_T_prime(number):
-    divisor = has_divisor(number)
-    if divisor:
-        if is_prime(divisor) and (number%divisor != 0 or number == divisor**2):
+    square = has_intiger_square(number)
+    if square:
+        if table_with_prime[int(square)]:
             return True
     return False
 
-class Zad2:
+def sito_arytostenesa(number):
+    table = [True for i in range(number + 1)]
+    for i in range(2,int(number**(1/2)) + 1):
+        if table[i]:
+            for j in range(i*i,number + 1,i):
+                table[j] = False
+    table[0] = False
+    table[1] = False
+    return table
+number_of_data = int(input())
+table_with_data = list(map(int,input().split()))
+table_with_prime = sito_arytostenesa(1000001)
+for i in table_with_data:
+    if is_T_prime(i):
+        print("YES")
+    else:
+        print("NO")
 
-    def __init__(self):
-        self.number_of_data = 0
-        self.table_with_data = []
-        self.table_with_results = []
-    def load_data(self):
-        self.number_of_data = int(input())
-        self.table_with_data = list(map(int,input().split()))
-    def fill_result(self):
-        for i in self.table_with_data:
-            if is_T_prime(i):
-                self.table_with_results.append("YES")
-            else:
-                self.table_with_results.append("NO")
-    def print_result(self):
-        for i in self.table_with_results[:-1]:
-            print(i)
-        print(self.table_with_results[-1],end="")
-    def run(self):
-        self.load_data()
-        self.fill_result()
-        self.print_result()
-
-zad2 = Zad2()
-zad2.run()
 
