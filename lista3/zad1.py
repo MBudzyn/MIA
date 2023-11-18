@@ -24,22 +24,20 @@ class Zad1:
         self.smallest = min(self.c_length, self.b_length, self.a_length)
         self.biggest = max(self.c_length, self.b_length, self.a_length)
         self.mid = mid_el(self.a_length,self.b_length,self.c_length)
-        if self.biggest > self.length_of_ribbon:
-            self.biggest = self.length_of_ribbon
-        if self.mid > self.length_of_ribbon:
-            self.mid = self.length_of_ribbon
 
     def table_filling(self):
 
         self.table[self.smallest] = 1
-        self.table[self.mid] = 1
-        self.table[self.biggest] = 1
+        if self.table[self.mid] < self.length_of_ribbon:
+            self.table[self.mid] = 1
+        if self.table[self.biggest] < self.length_of_ribbon:
+            self.table[self.biggest] = 1
         self.table[0] = 0
-        for i in range(self.smallest + 1,self.mid):
+        for i in range(self.smallest + 1,min(self.mid,self.length_of_ribbon + 1)):
             if self.table[i - self.smallest] != -1:
                 self.table[i] = self.table[i - self.smallest] + 1
 
-        for i in range(self.mid,self.biggest):
+        for i in range(self.mid,min(self.length_of_ribbon + 1,self.biggest)):
             if self.table[i - self.mid] != -1 and self.mid != i:
                 self.table[i] = self.table[i - self.mid] + 1
             if self.table[i - self.smallest] != -1:
